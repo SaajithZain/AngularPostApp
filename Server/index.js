@@ -2,11 +2,11 @@ const app = require('express')();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const database = require('./config/db');
+const Routes = require('./routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
-
-
+app.use('/', Routes);
 
 app.listen('3000', (err)=>{
     if(err)
