@@ -48,10 +48,18 @@ function Controller() {
             };
             let newUser = new UserSchema(userData);
             newUser.save().then(()=> {
-                resolve({status: 201, message: 'signup successful'});
+                resolve({
+                    status: 201, 
+                    message: 'signup successful',
+                    auth: true
+                });
             }).catch((err)=>{
                 console.log(JSON.stringify(error, null, 2)); // you might want to do this to examine and trace where the problem is emanating from
-                reject({status:500, message: 'error signing up user'})
+                reject({
+                    status:500,
+                    message: 'error signing up user',
+                    auth:false
+                })
             })
 
         })
