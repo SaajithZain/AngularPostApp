@@ -5,18 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/authentication/login/login.component';
 import { MainComponent } from './components/main/main.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { SignUpComponent } from './components/authentication/sign-up/sign-up.component';
 import { PageNotFoundComponent} from './components/page-not-found/pagenotfound-component'
-
-const appRoutes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'Home', component: MainComponent},
-  { path: 'Login', component: LoginComponent },
-  { path: "Signup", component:SignUpComponent},
-  { path: "**", component:PageNotFoundComponent}
-];
+import { AppRouterModule } from './app.routes-module';
+import { GetPostsComponent } from './components/posts/get-posts/get-posts.component';
+import { CreatePostComponent } from './components/posts/create-post/create-post.component';
+import { AuthService} from './components/authentication/authentication-service/auth.service';
+import { HeaderComponent } from './components/header/header/header.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +22,9 @@ const appRoutes: Routes = [
     MainComponent,
     SignUpComponent,
     PageNotFoundComponent,
+    GetPostsComponent,
+    CreatePostComponent,
+    HeaderComponent,
   
     
   ],
@@ -32,10 +32,10 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    AppRouterModule
   ],
   providers: [
-    
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

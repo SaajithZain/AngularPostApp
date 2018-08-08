@@ -2,22 +2,21 @@
   <form (ngSubmit)="onLoginSubmit(loginForm)" #loginForm="ngForm">
       <h3>Login</h3> 
           <div class="form-group">
-              <input class="form-control" type="email" name="email" placeholder="Email" ngModel/>
+              <input class="form-control" type="email" name="email" placeholder="Email"  #email="ngModel" ngModel required/>
           </div>
-        
           <div class="form-group">
-              <input class="form-control" type="password" name="password" placeholder="Password" ngModel/>
+              <input class="form-control" type="password" name="password" placeholder="Password"  ngModel required #password="ngModel"/>
           </div>
-        
           <div class="form-group">
               <button class="btn btn-primary btn-block" type="submit">Log In</button>
           </div>
-        
           <div class="form-group">
               <button type="button" (click)="onSignUpClick()" class="btn btn-secondary btn-block">Sign Up</button>
           </div>
-              
           <a href="#" class="forgot">Forgot your email or password?</a>
-      </form>
+          <div *ngIf="loginStatus" class="alert alert-success" role="alert">
+                Successfully Logged in
+         </div>
+    </form>
   </div>
 
