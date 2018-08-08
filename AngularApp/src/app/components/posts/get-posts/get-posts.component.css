@@ -1,0 +1,22 @@
+.row{
+    padding-top: 1rem;
+   
+}
+.container{
+    margin-top: 0.5rem;
+    background-color: #ecf0f1;
+}
+
+.col-md-3{
+    padding-top: 1rem;
+    margin-right: 0.1 rem;   
+}
+
+.card{
+   background-color: grey;
+   
+}
+
+.btn{
+    margin-top: 1rem;
+}
