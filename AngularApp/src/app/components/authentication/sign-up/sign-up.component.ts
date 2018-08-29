@@ -16,21 +16,21 @@ export class SignUpComponent implements OnInit {
 
   onRegistrationSubmit(form : NgForm )
   {
-   
+   this.authService.setLoggedInStatus(false);
     //console.log(form.value.email, form.value.password);
-    this.authService.signUp(form.value.email, form.value.password)
-    .subscribe( responseData => {
-      if(responseData.auth){
-        console.log("sign Up success")
-        this.router.navigate(['/Login']);
-      }
-      else{
+    // this.authService.signUp(form.value.email, form.value.password)
+    // .subscribe( responseData => {
+    //   if(responseData.auth){
+    //     console.log("sign Up success")
+    //     this.router.navigate(['/Login']);
+    //   }
+    //   else{
 
-      }
-    },
-    error => {
-      console.log(error);
-    });
+    //   }
+    // },
+    // error => {
+    //   console.log(error);
+    // });
 
   }
 }
