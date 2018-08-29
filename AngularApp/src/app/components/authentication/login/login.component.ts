@@ -4,6 +4,7 @@ import { Router }  from '@angular/router';
 import { Http ,Headers, RequestOptions} from '@angular/http'; 
 import {environment} from '../../../../environments/environment'
 import { AuthService } from '../authentication-service/auth.service';
+import  { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   protected baseEndPoint = environment.apiEndPoint;
 
-  constructor(private router: Router, private http: Http, private loginservice:AuthService) { }
+  constructor(private router: Router, private http: Http, 
+              private authService :AuthService, 
+              private toaster:ToastrService) { }
   private username:string;
   private pswd:string;
   loginStatus:boolean;
@@ -28,24 +31,33 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit(form : NgForm){
- 
-    this.loginservice.login(form.value.email, form.value.password)
+    this.authService.login(form.value.email, form.value.password)
       .subscribe( responseData => {
         if(responseData.auth){
           this.router.navigate(['/']);
-          localStorage.setItem('token', responseData.token);  
-        }
+          this.authService.setAuthToken(responseData.token);
+          this.authService.setLoggedInStatus(true);                     
+          this.toaster.success(responseData.message,"",{
+            timeOut: 10000,
+            positionClass: 'toast-bottom-right'
+            
+          });
+        
+      }
         else{
-
         }
       },
       error => {
-        console.log(error);
+          
+          this.toaster.error("Login Failed","",{
+          timeOut: 10000,
+          positionClass: 'toast-bottom-right'
+          
+        });
       });
+
   }
-
- 
-
+  
 }
 export class UserModel{
     username: string;
