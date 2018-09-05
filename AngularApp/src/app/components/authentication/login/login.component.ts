@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/Signup']);
   }
 
+  //called on submitting login
   onLoginSubmit(form : NgForm){
     this.authService.login(form.value.email, form.value.password)
       .subscribe( responseData => {

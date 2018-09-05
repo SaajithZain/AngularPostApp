@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(){
-    console.log("token cleared");
     this.authService.clearLocalStorage();
     this.router.navigate(['/Login']);
     this.authService.setLoggedInStatus(false);

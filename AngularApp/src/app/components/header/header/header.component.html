@@ -12,7 +12,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/Posts">Posts</a>
+        <a class="nav-link" routerLink="/Posts" *ngIf="isLoggedIn">Posts</a>
       </li>
     </ul>
     <div class="dropdown">
@@ -20,7 +20,6 @@
         aria-expanded="false">
         <fa name="fas fa-user"></fa>
       </button>
-
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <button class="dropdown-item" (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
         <a class="dropdown-item" *ngIf="!isLoggedIn" routerLink="/Login">Login</a>

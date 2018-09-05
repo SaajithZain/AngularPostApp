@@ -5,9 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { ParseTreeResult, identifierModuleUrl } from '../../../../../node_modules/@angular/compiler';
-//import { JwtHelperService } from '@auth0/angular-jwt';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/catch';
+
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +35,8 @@ export class AuthService {
   login(email, password) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     headers.append('Accept','application/json');
+    headers.append('access-control-allow-origin', '*');
+    
     let options = new RequestOptions({ headers: this.headers });
     let loginData = {
       username: email,
