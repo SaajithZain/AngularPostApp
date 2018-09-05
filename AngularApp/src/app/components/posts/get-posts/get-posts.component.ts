@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-get-posts',
@@ -25,13 +26,12 @@ export class GetPostsComponent implements OnInit {
   
   ];  
 
-  onAddPostClick(){
-    if(!this.newPostClicked)
-    {
-      this.newPostClicked=true;
-    }else{
-      this.newPostClicked=false;  
-    }
-    
+  onAddPost( form: NgForm){
+  if(form.valid){
+    console.log(form.value.postTitle, form.value.postDescription);
+  }
+  else{
+    console.log("invalid");
+  }
   }
 }

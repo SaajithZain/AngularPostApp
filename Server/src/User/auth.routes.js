@@ -22,7 +22,13 @@ router.all('/logout', (req, res) => {
 })
 
 router.use((req, res, next) => {
-   
+    
+    console.log(req.originalUrl);
+    if(req.originalUrl == '/login' || req.originalUrl == '/signup' ){
+        return next();
+             
+    }
+
     var token = req.headers['token'];
     if(!token) return res.status(401).send({
         auth: false,
@@ -33,6 +39,7 @@ router.use((req, res, next) => {
             .send({auth: false, message: 'Failed to authenticate token'});
         next();
     })
-});
+
+}); 
 
 module.exports = router;

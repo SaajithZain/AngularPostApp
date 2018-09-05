@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-
+import { NgForm } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -17,6 +17,7 @@ import { GetPostsComponent } from './components/posts/get-posts/get-posts.compon
 import { AuthService} from './components/authentication/authentication-service/auth.service';
 import { HeaderComponent } from './components/header/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ToastAlertService} from  './Services/toast.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ToastrModule.forRoot()
   ],
   providers: [
-    AuthService
+    AuthService,
+    ToastAlertService,
+    NgForm
   ],
   bootstrap: [AppComponent]
 })

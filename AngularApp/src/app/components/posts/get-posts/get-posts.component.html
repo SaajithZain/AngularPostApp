@@ -9,22 +9,24 @@
           <span aria-hidden="true">&times;</span>
           </button>
         </div>
+       <form #newPostForm="ngForm" (ngSubmit)="onAddPost(newPostForm)">
         <div class="modal-body">
             <div class="form-group">
-                <input class="form-control" type="text" name="postTitle" placeholder="Title"  #email="ngModel" ngModel required/>
+                <input class="form-control" type="text" name="postTitle" placeholder="Title"  ngModel required/>
             </div>
             <div class="form-group">
-                <textarea class="form-control" name="description" placeholder="Description" rows="3"></textarea>
+                <textarea class="form-control" name="postDescription" placeholder="Description" rows="3" ngModel   ></textarea>
             </div>
-            
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close    </button>
-          <button type="button" class="btn btn-success">Add Post</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" >Add Post</button>
         </div>
+    </form>
       </div>
     </div>
   </div>   
+
   <!-- <displaying post in grid view> -->
 <div class="photo-gallery">
     <div class="container">
