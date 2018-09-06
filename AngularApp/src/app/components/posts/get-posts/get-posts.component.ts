@@ -14,7 +14,6 @@ export class GetPostsComponent implements OnInit {
 
   ngOnInit() {
     this.newPostClicked=false;
-    console.log("int it calle");
   }
 
  posts=[
@@ -27,11 +26,15 @@ export class GetPostsComponent implements OnInit {
   ];  
 
   onAddPost( form: NgForm){
-  if(form.valid){
-    console.log(form.value.postTitle, form.value.postDescription);
-  }
-  else{
-    console.log("invalid");
-  }
-  }
+    
+    if(form.valid){
+      let postTitle:string;
+      let postDescription:string;
+    
+      form.reset();
+    }
+    else{
+      console.log("invalid");
+    }
+    }
 }

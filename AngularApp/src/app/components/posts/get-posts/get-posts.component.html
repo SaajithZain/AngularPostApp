@@ -9,18 +9,18 @@
           <span aria-hidden="true">&times;</span>
           </button>
         </div>
-       <form #newPostForm="ngForm" (ngSubmit)="onAddPost(newPostForm)">
+       <form #postForm="ngForm" (ngSubmit)="onAddPost(postForm)">
         <div class="modal-body">
             <div class="form-group">
-                <input class="form-control" type="text" name="postTitle" placeholder="Title"  ngModel required/>
+                <input class="form-control" type="text" name="postTitle" [value]="postTitle"  placeholder="Title"  [(ngModel)]="postTitle" required/>
             </div>
             <div class="form-group">
-                <textarea class="form-control" name="postDescription" placeholder="Description" rows="3" ngModel   ></textarea>
+                <textarea class="form-control" name="postDescription" placeholder="Description" [(ngModel)]="postDescription" rows="3" required></textarea>
             </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success" >Add Post</button>
+          <button type="submit" [disabled]="!postForm.form.valid"  class="btn btn-success" >Add Post</button>
         </div>
     </form>
       </div>
