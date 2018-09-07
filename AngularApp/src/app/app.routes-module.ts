@@ -6,7 +6,7 @@ import { LoginComponent } from "./components/authentication/login/login.componen
 import { SignUpComponent } from "./components/authentication/sign-up/sign-up.component";
 import { PageNotFoundComponent } from "./components/page-not-found/pagenotfound-component";
 import { GetPostsComponent } from "./components/posts/get-posts/get-posts.component";
- import { AuthGuardService as AuthGuard, AuthGuardService} from "./components/authentication/authentication-service/auth-guard-service";
+ import { AuthGuardService as AuthGuard, AuthGuardService} from "./Services/authentication-service/auth-guard-service"
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'Home', pathMatch: 'full' },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../authentication-service/auth.service';
+import { AuthService } from '../../../Services/authentication-service/auth.service';
 import { Route, Router } from '../../../../../node_modules/@angular/router';
 import { ToastAlertService} from '../../../Services/toast.service'
 
@@ -22,7 +22,6 @@ export class SignUpComponent implements OnInit {
   onRegistrationSubmit(form : NgForm )
   {
    this.authService.setLoggedInStatus(false);
-    console.log(form.value.email, form.value.password);
     
     this.authService.signUp(form.value.email, form.value.password)
     .subscribe( responseData => {
@@ -33,7 +32,7 @@ export class SignUpComponent implements OnInit {
         this.router.navigate(['/Login']);
       }
       else{
-        this.toaster.toastFailed(responseData.messsage);
+       this.toaster.toastFailed(responseData);
       }
     },
     error => {

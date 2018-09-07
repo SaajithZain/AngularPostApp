@@ -22,14 +22,23 @@ router.all('/logout', (req, res) => {
 })
 
 router.use((req, res, next) => {
-    
-    console.log(req.originalUrl);
-    if(req.originalUrl == '/login' || req.originalUrl == '/signup' ){
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With,Content-Type,Accept,Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE,PUT");
+    res.setHeader("Access-Control-Allow-Origin","http://localhost:4200");
+    console.log(req.method, 'req.method');
+    if (req.method === 'OPTIONS') {
+        res.send(200);
+    }
+    if((req.originalUrl == '/login' || req.originalUrl == '/signup')){
         return next();
              
     }
 
     var token = req.headers['token'];
+    console.log(token);
+    console.log(headers);
     if(!token) return res.status(401).send({
         auth: false,
         message: 'No token provided'

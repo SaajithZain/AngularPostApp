@@ -61,7 +61,7 @@ var Controller = function () {
                 { _id: id }, data).then(() => {
                     resolve({
                         status: 200,
-                        message: "Post Updated Successfully"
+                        message: "Post Udated Successfully"
                     })
                 }).catch((err) => {
                     reject({

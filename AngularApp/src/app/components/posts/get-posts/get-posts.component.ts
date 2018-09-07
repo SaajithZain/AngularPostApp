@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,EventEmitter, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
+import { PostService } from '../../../Services/post-service/post.service'
+import { PostModel} from '../../../models/post.model'
+import { ToastrComponentlessModule } from 'ngx-toastr';
+import { getParseErrors } from '@angular/compiler';
 @Component({
   selector: 'app-get-posts',
   templateUrl: './get-posts.component.html',
@@ -8,33 +11,45 @@ import { NgForm } from '@angular/forms';
 })
 export class GetPostsComponent implements OnInit {
 
-  newPostClicked:boolean;
-  constructor() { }
-  
-
+  posts:PostModel[];
+  newPostClicked: boolean;  
+  constructor(private postService: PostService) { }
+  postCreated = new EventEmitter();
+  showmodal:boolean;
   ngOnInit() {
-    this.newPostClicked=false;
+    this.newPostClicked = false;
+    this.getPosts();
   }
 
- posts=[
-   {title:'post1',content:'this is my first posyt'},
-   {title:'post2',content:'this is my 2nd posyt'},
-   {title:'post3',content:'this is my 3rd posyt'},
-   {title:'post4',content:'this is my 4th posyt'},
-   {title:'post5',content:'this is my 5th posyt'},
-  
-  ];  
 
-  onAddPost( form: NgForm){
-    
-    if(form.valid){
-      let postTitle:string;
-      let postDescription:string;
-    
-      form.reset();
+  onAddPost(form: NgForm) {
+
+    if (form.valid) {
+      let postTitle: string;
+      let postDescription: string;
+      postDescription=form.value.postDescription;
+      postTitle=form.value.postTitle;
+     
+      this.postService.post(postTitle, postDescription)
+        .subscribe((res:any) => {
+          console.log(res );
+          this.getPosts();
+          this.showmodal=false;
+        }, error => {
+          console.error(error, 'error')
+        });
+        form.reset();
+        
     }
-    else{
+    else {
       console.log("invalid");
     }
-    }
+  }
+  getPosts(){
+    this.postService.getUserPost().subscribe((res:any)=>{  
+        this.posts=res;
+        
+    },error=>{
+    });
+  }
 }

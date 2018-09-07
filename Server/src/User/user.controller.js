@@ -14,7 +14,7 @@ function Controller() {
                 var token = jwt.sign({ id: data._id }, config.secret, {
                     expiresIn: 86400 // expires in 24 hours
                 });
-                if(data.password == password)
+                if(data.password == password && data.username==username)
                     resolve({
                         status: 200,
                         auth: true,
@@ -22,12 +22,20 @@ function Controller() {
                         token: token,
                         message: "Logged in successfully"
                     })
-                else
+                else if(data.password!=password)
                     resolve({
                         status: 401,
                         message: "incorrect password",
                         auth: false
                     })
+                else if(data.username=usernmae){
+                    resolve({
+                        status: 401,
+                        message: "incorrect username",
+                        auth: false
+                    })
+                }    
+                    
             }).catch((err)=> {
                 reject({
                     status: 500,

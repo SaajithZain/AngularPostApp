@@ -1,7 +1,7 @@
 
   <!-- Modal for new post creation -->
-  <div class="modal fade" id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" role="document" >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
@@ -40,8 +40,8 @@
             <div  class="row" >
                <div class="col-md-3" *ngFor="let post of posts">
                   <div class="card" >
-                      <h4 class="card-title">{{post.title}}</h4>
-                      <p class="card-text">Title {{post.content}}</p>
+                      <h4 class="card-title">{{post.postTitle}}</h4>
+                      <p class="card-text">Title {{post.postDescription}}</p>
 
                   </div>
                 </div>

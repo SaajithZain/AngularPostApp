@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RequestOptions, Http, Headers } from '@angular/http';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { ParseTreeResult, identifierModuleUrl } from '../../../../../node_modules/@angular/compiler';
+import { HttpResponse } from 'selenium-webdriver/http';
+import { UserModel} from '../../models/user.model'
 
 
 @Injectable({
@@ -38,15 +39,17 @@ export class AuthService {
     headers.append('access-control-allow-origin', '*');
     
     let options = new RequestOptions({ headers: this.headers });
-    let loginData = {
+    let loginData: UserModel = {
       username: email,
       password: password
     };
+   
     return this.http
-      .post(this.apiUrl + "login", loginData, options)
+      .post(this.apiUrl + "auth/login", loginData, options)
       .pipe(map(res => res.json()));
   }
 
+  //post request to sign up new user with username and email
   signUp(email, password) {
     let options = new RequestOptions({ headers: this.headers });
     let loginData = {
@@ -55,18 +58,19 @@ export class AuthService {
     };
    
     return this.http
-      .post(this.apiUrl + "signup", loginData, options)
+      .post(this.apiUrl + "auth/signup", loginData, options)
       .pipe(map(res => res.json()));
   }
   handleError(err: HttpErrorResponse) {
     return Observable.throw(err);
   }
 
-  
+  //check if token available
   setAuthToken(token:string){
     localStorage.setItem('token',token);
   }
 
+  //true if user is authenticated
   getAuthenticationStatus(){
     if(localStorage.getItem('token')== null )
     {
@@ -75,8 +79,9 @@ export class AuthService {
     return true;
   }
  
+  //clears local storage
   clearLocalStorage(){
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
   }
 
   getLoggedInStatus(){
@@ -85,5 +90,9 @@ export class AuthService {
 
   setLoggedInStatus(status:boolean){
     this.loggedInStatus.next(status);
+  }
+
+  getToken():string{
+   return localStorage.getItem('token');
   }
 }

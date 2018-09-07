@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router }  from '@angular/router'; 
 import { Http ,Headers, RequestOptions} from '@angular/http'; 
 import {environment} from '../../../../environments/environment'
-import { AuthService } from '../authentication-service/auth.service';
+import { AuthService } from '../../../Services/authentication-service/auth.service';
 import  { ToastrService } from 'ngx-toastr';
 import {ToastAlertService} from '../../../Services/toast.service'
 
@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
           this.toast.toastSuccess(responseData.message);
       }
         else{
+          console.log("logged in failed")
         }
       },
       error => {

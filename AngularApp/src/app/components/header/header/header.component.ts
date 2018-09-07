@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../authentication/authentication-service/auth.service';
+import { AuthService } from '../../../Services/authentication-service/auth.service';
 import { Router } from '../../../../../node_modules/@angular/router';
 
 @Component({
@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
 
   onLogout(){
 
-    
     this.authService.clearLocalStorage();
     this.router.navigate(['/Login']);
     this.authService.setLoggedInStatus(false);
